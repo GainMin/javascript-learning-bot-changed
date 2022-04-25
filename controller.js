@@ -3,6 +3,13 @@ const Lesson = require("./lesson");
 const File = require("./file");
 
 async function controllerDb(userInfo, lesson ="", trigger) {
+
+    return {
+        "user": function(){}(),
+        "updateLesson": fucntion(){}()
+    }
+
+
     const db = new DB(userInfo);
 
     switch(trigger) {
@@ -19,23 +26,19 @@ async function controllerDb(userInfo, lesson ="", trigger) {
                     flag: "newUser",
                     answer: await db.getUser()
                 }
-            }  
+            }
         case "updateLesson":
             console.log("DB ",lesson)
             await db.updateLesson(lesson);
             return true;
     }
 }
-async function controllerLesson(user, trigger) {
+async function controllerLesson(user) {
     const handlerLesson = new Lesson(user);
-
-    switch(trigger) {
-        case "getLinks":
-            return handlerLesson.getLinksLesson();
-        case "prev":
-            return handlerLesson.prevLesson();
-        case "next":
-            return  handlerLesson.nextLesson();
+    return {
+        "getLinks": () => handlerLesson.getLinksLesson(),
+        "prev": () => handlerLesson.prevLesson(),
+        "next": () => handlerLesson.nextLesson()
     }
 }
 async function controllerFile(config, lesson, trigger) {
@@ -52,6 +55,3 @@ async function controllerFile(config, lesson, trigger) {
 }
 
 module.exports = {controllerDb, controllerLesson, controllerFile};
-
-
-

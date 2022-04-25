@@ -5,13 +5,7 @@ class Lesson {
         this.user = {...objectUser.answer}
     }
     getLinksLesson() {
-        let numberLesson = this.user.lesson;
-        for (let key in LINKS) {
-            if(key === numberLesson) {
-                let arrLinks = [LINKS[key].lesson, LINKS[key].task];
-                return arrLinks;
-            }
-        }
+        return LINKS[this.user.lesson]();
     }
     prevLesson() {
         let lesson = Number(this.user.lesson.split('_')[1]) - 1;
